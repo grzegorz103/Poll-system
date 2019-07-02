@@ -16,6 +16,9 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { PollListComponent } from 'app/poll-list/poll-list.component';
+import { PollService } from 'app/poll-list/poll.service';
+
 
 
 @NgModule({
@@ -34,8 +37,10 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
-    UpgradeComponent
-  ]
+    UpgradeComponent,
+    PollListComponent
+  ],
+  providers: [PollService],
 })
 
 export class AdminLayoutModule {}

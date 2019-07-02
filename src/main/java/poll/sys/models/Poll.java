@@ -20,4 +20,7 @@ public class Poll
 
         @OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
         private List<Vote> votes;
+
+        @Column (name = "name")
+        private String name;
 }
