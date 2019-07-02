@@ -18,6 +18,7 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { PollListComponent } from 'app/poll-list/poll-list.component';
 import { PollService } from 'app/poll-list/poll.service';
+import { PollDetailsComponent } from 'app/poll-details/poll-details.component';
 
 
 
@@ -38,7 +39,8 @@ import { PollService } from 'app/poll-list/poll.service';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    PollListComponent
+    PollListComponent,
+    PollDetailsComponent
   ],
   providers: [PollService],
 })
