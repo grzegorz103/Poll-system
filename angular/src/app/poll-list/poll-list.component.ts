@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { PollService } from './poll.service';
 
-export interface Poll{
+export class Poll{
   id: number;
   votes: Vote[];
 }
 
-interface Vote{
+export class Vote{
   id: number;
   name: string;
   voteCount: number;
-  selected: boolean;
 }
 @Component({
   selector: 'app-poll-list',

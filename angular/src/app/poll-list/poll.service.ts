@@ -27,4 +27,7 @@ export class PollService {
      return this.http.post(this.url + id, null);
   }
 
+  save(poll: Poll){
+    return this.http.post(this.url, poll);
+  }
 }

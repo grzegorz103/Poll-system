@@ -5,6 +5,9 @@ import { Poll } from 'app/poll-list/poll-list.component';
 import { ChartType } from 'app/lbd/lbd-chart/lbd-chart.component';
 import * as Chartist from 'chartist';
 import * as MyLegend from 'chartist-plugin-legend';
+
+declare var $: any;
+
 @Component({
   selector: 'app-poll-details',
   templateUrl: './poll-details.component.html',
@@ -102,15 +105,34 @@ export class PollDetailsComponent implements OnInit {
   }
 
   vote() {
+    if (this.selectedItems.every(e => !e)) {
+      this.showNotification('danger', 'You haven\'t selected any option!', 'pe-7s-info');
+      return;
+    }
+    let success: boolean;
     for (let i = 0; i < this.poll.votes.length; ++i) {
       if (this.selectedItems[i]) {
-    this.pollService.vote(this.poll.votes[i].id).subscribe(res => alert("Thank you for voting"));     
+        this.pollService.vote(this.poll.votes[i].id).subscribe(res => success = true);
       }
     }
-    // this.pollService.vote(this.selectedItem).subscribe(res => alert("Thank you for voting"));
+    this.showNotification('success', 'Thank you for voting', 'pe-7s-smile');
   }
 
   displayStats() {
     this.display = !this.display;
+  }
+
+  showNotification(type: string, text: string, icon: string) {
+    $.notify({
+      icon: icon,
+      message: text
+    }, {
+        type: type,
+        timer: 1000,
+        placement: {
+          from: 'top',
+          align: 'right'
+        }
+      });
   }
 }
