@@ -2545,7 +2545,31 @@ input:focus {
 .ct-series-o .ct-slice-pie, .ct-series-o .ct-area {
   fill: #a748ca;
 }
+.color0{
+  width: 18px;
+  text-align:center;
+  color: red !important;
+  display: inline-block;
+}
 
+.color1{
+  width: 18px;
+  text-align:center;
+  color: blue;
+  display: inline-block;
+}
+.color2{
+  width: 18px;
+  text-align:center;
+  color: yellow;
+  display: inline-block;
+}
+.color3{
+  width: 18px;
+  text-align:center;
+  color: green;
+  display: inline-block;
+}
 .ct-square {
   display: block;
   position: relative;
