@@ -1,4 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-.bgg{
-    stroke: #333;
+.color0{
+    color: red;
+}
+
+.color1{
+    color: blue;
+    display: inline-block;
+}
+.color2{
+    width: 18px;
+    text-align:center;
+    color: yellow;
+    display: inline-block;
+}
+.color3{
+    width: 18px;
+    text-align:center;
+    color: green;
+    display: inline-block;
 }

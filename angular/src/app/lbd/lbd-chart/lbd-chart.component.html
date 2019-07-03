@@ -8,9 +8,12 @@
 
     <div class="footer">
       <div class="legend">
-        <span *ngFor="let item of legendItems">
+       <!-- <span *ngFor="let item of legendItems">
           <i [ngClass]="item.imageClass"></i> {{ item.title }}
-        </span>
+        </span> -->
+        <div *ngFor="let vote of legItems; let i = index">
+            <i class="fa fa-circle" [style.color]="colors[i]"></i>{{ vote.name }}
+          </div>
       </div>
       <hr *ngIf="withHr">
       <div class="stats">
