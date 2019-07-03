@@ -5,6 +5,8 @@ import * as Chartist from 'chartist';
 import { Poll, Vote } from 'app/poll-list/poll-list.component';
 import { PollService } from 'app/poll-list/poll.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,7 +17,7 @@ export class HomeComponent implements OnInit {
   poll: Poll;
 
   constructor(
-    private pollService: PollService;
+    private pollService: PollService
   ) {
     this.poll = new Poll();
     this.poll.votes = [];
@@ -30,6 +32,22 @@ export class HomeComponent implements OnInit {
   }
 
   save(){
-    this.pollService.save(this.poll).subscribe(res=>alert("Thank u"));
+    this.pollService.save(this.poll).subscribe(res=>{
+      $.notify({
+        icon: 'pe-7s-smile',
+        message: 'You poll has been created!'
+      }, {
+          type: 'success',
+          timer: 1000,
+          placement: {
+            from: 'top',
+            align: 'right'
+          }
+        });
+    }));
+  }
+
+  removeAnswer(id: number){
+    this.poll.votes.splice(id, 1);
   }
 }

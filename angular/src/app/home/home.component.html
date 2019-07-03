@@ -1,8 +1,8 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
+            <div class="form-group">
+                <div class="col-sm-6">
                     <label>Your question</label>
                     <input type="text" class="form-control" placeholder="" [(ngModel)]="poll.name">
                 </div>
@@ -12,11 +12,14 @@
         Poll options
         <a class="btn btn-info" (click)="add()">Add new vote</a>
         <div *ngFor="let vote of poll.votes; let i=index" class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label>Option #{{i}}</label>
+            <div class="form-group">
+                <label>Option #{{i + 1}}
+                    <i class="pe-7s-close-circle icon" (click)="removeAnswer(i)" ></i></label>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" placeholder="" [(ngModel)]="poll.votes[i].name">
+                    </div>
                 </div>
-                <input type="text" class="form-control" placeholder="" [(ngModel)]="poll.votes[i].name">
             </div>
         </div>
         <a class="btn btn-success" (click)="save()">Send!</a>
