@@ -10,6 +10,7 @@ interface Vote{
   id: number;
   name: string;
   voteCount: number;
+  selected: boolean;
 }
 @Component({
   selector: 'app-poll-list',

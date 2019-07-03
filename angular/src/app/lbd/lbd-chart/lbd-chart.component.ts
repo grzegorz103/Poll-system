@@ -67,8 +67,6 @@ export class LbdChartComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    console.log(this.legItems);
-    console.log('asd');
     switch (this.chartType) {
       case ChartType.Pie:
         new Chartist.Pie(`#${this.chartId}`, this.chartData, this.chartOptions, this.chartResponsive);

@@ -14,7 +14,8 @@ export class PollDetailsComponent implements OnInit {
 
   urlId: number;
   poll: Poll;
-  selectedItem: number;
+  // selectedItem: number;
+  selectedItems: boolean[];
   chartType: any;
   chartData: any;
   chartLegendItems: any;
@@ -46,7 +47,10 @@ export class PollDetailsComponent implements OnInit {
       this.poll = res;
       let voteCount = 0;
       if (this.poll !== null) {
-        this.poll.votes.forEach(e => voteCount += e.voteCount);
+        this.selectedItems = [];
+        this.poll.votes.forEach(e => {
+          voteCount += e.voteCount;
+        });
         if (voteCount > 0) {
           let labels = [];
           let series = [];
@@ -55,20 +59,20 @@ export class PollDetailsComponent implements OnInit {
             //      this.chartData.push((this.poll.votes[i].voteCount / voteCount) * 100);
             let percent = Math.round((this.poll.votes[i].voteCount / voteCount) * 100);
             let label = this.poll.votes[i].name.trim();
-            labels.push(label.length > 15 ? label.substring(0, 15) + ' ' + percent + '%' : label + ' ' + percent + '%' );
+            labels.push(label.length > 15 ? label.substring(0, 15) + ' ' + percent + '%' : label + ' ' + percent + '%');
             series.push(percent);
             votes.push(this.poll.votes[i].voteCount);
           }
           this.chartType = ChartType.Pie;
           this.chartData = { labels, series };
-         // this.chartLegendItems = [
-           // { title: 'Open', imageClass: 'fa fa-circle text-info' },
-            //{ title: 'Bounce', imageClass: 'fa fa-circle text-danger' },
-            //{ title: 'Unsubscribe', imageClass: 'fa fa-circle text-warning' }
-         // ];
-         // for (let i = 0; i < this.poll.votes.length; ++i) {
-         //   this.chartLegendItems.push({ title: this.poll.votes[i].name, imageClass: 'fa fa-circle color' + i });
-         // }
+          // this.chartLegendItems = [
+          // { title: 'Open', imageClass: 'fa fa-circle text-info' },
+          //{ title: 'Bounce', imageClass: 'fa fa-circle text-danger' },
+          //{ title: 'Unsubscribe', imageClass: 'fa fa-circle text-warning' }
+          // ];
+          // for (let i = 0; i < this.poll.votes.length; ++i) {
+          //   this.chartLegendItems.push({ title: this.poll.votes[i].name, imageClass: 'fa fa-circle color' + i });
+          // }
           this.activityChartOptions = {
             height: '245px',
             //  plugins: [Chartist.plugins.legend()]
@@ -84,7 +88,7 @@ export class PollDetailsComponent implements OnInit {
             }]
           ];
           console.log(series);
-          this.barChartData = { labels, series:[votes] };
+          this.barChartData = { labels, series: [votes] };
           this.barChartOptions = {
             seriesBarDistance: 10,
             axisX: {
@@ -98,10 +102,15 @@ export class PollDetailsComponent implements OnInit {
   }
 
   vote() {
-    this.pollService.vote(this.selectedItem).subscribe(res => alert("Thank you for voting"));
+    for (let i = 0; i < this.poll.votes.length; ++i) {
+      if (this.selectedItems[i]) {
+    this.pollService.vote(this.poll.votes[i].id).subscribe(res => alert("Thank you for voting"));     
+      }
+    }
+    // this.pollService.vote(this.selectedItem).subscribe(res => alert("Thank you for voting"));
   }
 
-  displayStats(){
+  displayStats() {
     this.display = !this.display;
   }
 }
