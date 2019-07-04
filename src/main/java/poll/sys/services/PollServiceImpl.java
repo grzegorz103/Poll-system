@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import poll.sys.models.Poll;
 import poll.sys.repositories.PollRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -34,6 +35,7 @@ public class PollServiceImpl implements PollService
         @Override
         public Poll create ( Poll poll )
         {
+                poll.setPostDate( LocalDateTime.now() );
                 return pollRepository.save( poll );
         }
 }

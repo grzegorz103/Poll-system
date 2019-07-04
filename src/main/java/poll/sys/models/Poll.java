@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,6 +26,9 @@ public class Poll
         @Column (name = "name")
         private String name;
 
-        @Column(name="multiple_answer")
+        @Column (name = "multiple_answer")
         private boolean multipleAnswer;
+
+        @Column (name = "post_date")
+        private LocalDateTime postDate;
 }

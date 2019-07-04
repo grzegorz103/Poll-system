@@ -16,7 +16,10 @@ import { CreatePollComponent } from './create-poll/create-poll.component';
 import { PollListComponent } from './poll-list/poll-list.component';
 import { PollService } from './poll-list/poll.service';
 import { HttpClientModule } from '@angular/common/http';
-import { PollDetailsComponent } from './poll-details/poll-details.component';
+import { PollDetailsComponent } from './poll-details/poll-details.component'; 
+import { MomentModule } from 'angular2-moment';
+
+
 
 @NgModule({
   imports: [

@@ -19,6 +19,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { PollListComponent } from 'app/poll-list/poll-list.component';
 import { PollService } from 'app/poll-list/poll.service';
 import { PollDetailsComponent } from 'app/poll-details/poll-details.component';
+import { MomentModule } from 'angular2-moment';
 
 
 
@@ -28,6 +29,7 @@ import { PollDetailsComponent } from 'app/poll-details/poll-details.component';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     LbdModule,
+    MomentModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [
