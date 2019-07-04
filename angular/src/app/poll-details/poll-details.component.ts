@@ -106,6 +106,10 @@ export class PollDetailsComponent implements OnInit {
   }
 
   vote() {
+    if(!this.poll.multipleAnswer && this.selectedItems.filter(e=>e).length > 1){
+      this.showNotification('danger', 'Something went wrong', 'pe-7s-info');
+      return;
+    }
     if (this.selectedItems.every(e => !e)) {
       this.showNotification('danger', 'You haven\'t selected any option!', 'pe-7s-info');
       return;
@@ -140,14 +144,14 @@ export class PollDetailsComponent implements OnInit {
   asd(id: number) {
     if (!this.poll.multipleAnswer && this.selectedItems.filter(e => e === true).length > 0) {
       this.selectedItems[id] = false;
-      alert(this.selectedItems.filter(e => e===true).length);
+      alert(this.selectedItems.filter(e => e === true).length);
       this.showNotification('danger', 'You can\'t select more than one option!', 'pe-7s-info');
     } else {
       this.selectedItems[id] = true;
     }
   }
 
-  isDisabled(id: number){
-    return !this.poll.multipleAnswer && !this.selectedItems[id] &&this.selectedItems.filter(e=>e).length > 0;
+  isDisabled(id: number) {
+    return !this.poll.multipleAnswer && !this.selectedItems[id] && this.selectedItems.filter(e => e).length > 0;
   }
 }

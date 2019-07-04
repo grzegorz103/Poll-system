@@ -1,34 +1,37 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row form-check form-check-radio">
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <label>Your question</label>
-                    <input type="text" class="form-control" placeholder="" [(ngModel)]="poll.name">
-                </div>
-            </div>
-        </div>
-        <div class="form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" [(ngModel)]="poll.multipleAnswer">
-                <span class="form-check-sign"></span>
-                Allow multiple answers
-            </label>
-        </div>
-        <hr>
-        Poll options
-        <a class="btn btn-info" (click)="add()">Add new vote</a>
-        <div *ngFor="let vote of poll.votes; let i=index" class="row">
-            <div class="form-group">
-                <label>Option #{{i + 1}}
-                    <i class="pe-7s-close-circle icon" (click)="removeAnswer(i)"></i></label>
-                <div class="row">
+        <form (ngSubmit)="save()" #pollForm="ngForm">
+            <div class="row form-check form-check-radio">
+                <div class="form-group">
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" placeholder="" [(ngModel)]="poll.votes[i].name">
+                        <label>Your question</label>
+                        <input type="text" required minlength="3" maxlength="250" class="form-control" placeholder="" [(ngModel)]="poll.name" #namePoll="ngModel" name="namePoll">
                     </div>
                 </div>
             </div>
-        </div>
-        <a class="btn btn-success" (click)="save()">Send!</a>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="poll.multipleAnswer" name="multipleAnswer">
+                    <span class="form-check-sign"></span>
+                    Allow multiple answers
+                </label>
+            </div>
+            <hr>
+            Poll options
+            <a class="btn btn-info" (click)="add()">Add new vote</a>
+            <div *ngFor="let vote of poll.votes; let i=index" class="row">
+                <div class="form-group">
+                    <label>Option #{{i + 1}}
+                        <i class="pe-7s-close-circle icon" (click)="removeAnswer(i)"></i></label>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" required minlength="2" maxlength="250"  class="form-control" placeholder="" [(ngModel)]="poll.votes[i].name"
+                            #votePoll="ngModel" name="'{{ 'votePoll' + i }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" [disabled]="!pollForm.form.valid" class="btn btn-success">Send!</button>
+        </form>
     </div>
 </div>

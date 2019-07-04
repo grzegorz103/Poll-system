@@ -23,6 +23,7 @@ a:boolean[];
     this.poll = new Poll();
     this.poll.multipleAnswer = false;
     this.poll.votes = [];
+    this.poll.votes.push(new Vote());
   }
 
   ngOnInit() {
@@ -50,7 +51,9 @@ a:boolean[];
   }
 
   removeAnswer(id: number) {
-    this.poll.votes.splice(id, 1);
+    if(this.poll.votes.length > 1){
+      this.poll.votes.splice(id, 1);
+    }
   }
 
   changeMultipleAnswer() {alert('ok');
