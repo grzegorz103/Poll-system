@@ -15,11 +15,13 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   poll: Poll;
-
+a:boolean[];
   constructor(
     private pollService: PollService
   ) {
+    this.a = [];
     this.poll = new Poll();
+    this.poll.multipleAnswer = false;
     this.poll.votes = [];
   }
 
@@ -27,12 +29,12 @@ export class HomeComponent implements OnInit {
 
   }
 
-  add(){
+  add() {
     this.poll.votes.push(new Vote());
   }
 
-  save(){
-    this.pollService.save(this.poll).subscribe(res=>{
+  save() {
+    this.pollService.save(this.poll).subscribe(res => {
       $.notify({
         icon: 'pe-7s-smile',
         message: 'You poll has been created!'
@@ -44,10 +46,14 @@ export class HomeComponent implements OnInit {
             align: 'right'
           }
         });
-    }));
+    });
   }
 
-  removeAnswer(id: number){
+  removeAnswer(id: number) {
     this.poll.votes.splice(id, 1);
+  }
+
+  changeMultipleAnswer() {alert('ok');
+    this.poll.multipleAnswer = !this.poll.multipleAnswer;
   }
 }

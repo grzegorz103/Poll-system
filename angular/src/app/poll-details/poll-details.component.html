@@ -10,9 +10,9 @@
           {{ vote.name }}
         </label>
       </div>-->
-        
+
         <div class="checkbox">
-          <input [attr.id]="vote.name" [(ngModel)]="selectedItems[i]" type="checkbox">
+          <input [attr.id]="vote.name" [(ngModel)]="selectedItems[i]" type="checkbox" [disabled]="isDisabled(i)">
           <label [attr.for]="vote.name">{{ vote.name }}</label>
         </div>
       </div>

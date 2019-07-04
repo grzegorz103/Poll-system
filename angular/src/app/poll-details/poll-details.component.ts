@@ -65,6 +65,7 @@ export class PollDetailsComponent implements OnInit {
             labels.push(label.length > 15 ? label.substring(0, 15) + ' ' + percent + '%' : label + ' ' + percent + '%');
             series.push(percent);
             votes.push(this.poll.votes[i].voteCount);
+            this.selectedItems.push(false);
           }
           this.chartType = ChartType.Pie;
           this.chartData = { labels, series };
@@ -134,5 +135,19 @@ export class PollDetailsComponent implements OnInit {
           align: 'right'
         }
       });
+  }
+
+  asd(id: number) {
+    if (!this.poll.multipleAnswer && this.selectedItems.filter(e => e === true).length > 0) {
+      this.selectedItems[id] = false;
+      alert(this.selectedItems.filter(e => e===true).length);
+      this.showNotification('danger', 'You can\'t select more than one option!', 'pe-7s-info');
+    } else {
+      this.selectedItems[id] = true;
+    }
+  }
+
+  isDisabled(id: number){
+    return !this.poll.multipleAnswer && !this.selectedItems[id] &&this.selectedItems.filter(e=>e).length > 0;
   }
 }

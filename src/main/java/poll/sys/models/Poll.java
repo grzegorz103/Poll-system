@@ -23,4 +23,7 @@ public class Poll
 
         @Column (name = "name")
         private String name;
+
+        @Column(name="multiple_answer")
+        private boolean multipleAnswer;
 }

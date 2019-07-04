@@ -3,7 +3,9 @@ import { PollService } from './poll.service';
 
 export class Poll{
   id: number;
+  name: string;
   votes: Vote[];
+  multipleAnswer: boolean;
 }
 
 export class Vote{
