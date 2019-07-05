@@ -15,13 +15,14 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   poll: Poll;
-a:boolean[];
+  a: boolean[];
   constructor(
     private pollService: PollService
   ) {
     this.a = [];
     this.poll = new Poll();
     this.poll.multipleAnswer = false;
+    this.poll.allowSameIp = false;
     this.poll.votes = [];
     this.poll.votes.push(new Vote());
   }
@@ -51,12 +52,13 @@ a:boolean[];
   }
 
   removeAnswer(id: number) {
-    if(this.poll.votes.length > 1){
+    if (this.poll.votes.length > 1) {
       this.poll.votes.splice(id, 1);
     }
   }
 
-  changeMultipleAnswer() {alert('ok');
+  changeMultipleAnswer() {
+    alert('ok');
     this.poll.multipleAnswer = !this.poll.multipleAnswer;
   }
 }

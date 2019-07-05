@@ -23,8 +23,8 @@ export class PollService {
      return this.http.get<Poll>(this.url + id);
    }
 
-   vote(id: number) {
-     return this.http.post(this.url + id, null);
+   vote(votes: number[]) {
+     return this.http.put(this.url, votes);
   }
 
   save(poll: Poll){

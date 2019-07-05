@@ -29,6 +29,7 @@ export class PollDetailsComponent implements OnInit {
   barChartOptions: any;
   barChartData: any;
   display: boolean;
+  success: boolean;
 
   constructor(
     private pollService: PollService,
@@ -106,7 +107,7 @@ export class PollDetailsComponent implements OnInit {
   }
 
   vote() {
-    if(!this.poll.multipleAnswer && this.selectedItems.filter(e=>e).length > 1){
+    if (!this.poll.multipleAnswer && this.selectedItems.filter(e => e).length > 1) {
       this.showNotification('danger', 'Something went wrong', 'pe-7s-info');
       return;
     }
@@ -114,13 +115,22 @@ export class PollDetailsComponent implements OnInit {
       this.showNotification('danger', 'You haven\'t selected any option!', 'pe-7s-info');
       return;
     }
-    let success: boolean;
+    alert('cc');
+    let selectedVotes = [];
     for (let i = 0; i < this.poll.votes.length; ++i) {
       if (this.selectedItems[i]) {
-        this.pollService.vote(this.poll.votes[i].id).subscribe(res => success = true);
+        selectedVotes.push(this.poll.votes[i].id);
+         /* this.pollService.vote(this.poll.votes[i].id).subscribe(res => this.success = true, err =>this.success = false);
+         if (!this.success) {
+           this.showNotification('danger', 'You have already voted in this poll!', 'pe-7s-info');
+           return;
+         }*/
       }
     }
-    this.showNotification('success', 'Thank you for voting', 'pe-7s-smile');
+    this.pollService.vote(selectedVotes).subscribe(res =>
+      this.showNotification('success', 'Thank you for voting', 'pe-7s-smile'),
+      err =>  this.showNotification('danger', 'You have alredy voted in this poll!', 'pe-7s-info'));
+    //  this.showNotification('success', 'Thank you for voting', 'pe-7s-smile');
   }
 
   displayStats() {

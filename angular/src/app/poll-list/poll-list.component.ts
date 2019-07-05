@@ -8,6 +8,7 @@ export class Poll {
   votes: Vote[];
   multipleAnswer: boolean;
   postDate: any;
+  allowSameIp: boolean;
 }
 
 export class Vote {

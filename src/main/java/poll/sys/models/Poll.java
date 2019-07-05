@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table (name = "polls")
@@ -31,4 +32,11 @@ public class Poll
 
         @Column (name = "post_date")
         private LocalDateTime postDate;
+
+        @Column (name = "allow_same_ip")
+        private boolean allowSameIp;
+
+        @Column (name = "ips")
+        @ElementCollection (targetClass = String.class)
+        private Set<String> usersIps;
 }

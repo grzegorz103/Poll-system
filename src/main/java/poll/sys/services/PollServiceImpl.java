@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import poll.sys.models.Poll;
 import poll.sys.repositories.PollRepository;
+import poll.sys.repositories.VoteRepository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +14,8 @@ import java.util.List;
 public class PollServiceImpl implements PollService
 {
         private final PollRepository pollRepository;
+        @Autowired
+        private VoteRepository voteRepository;
 
         @Autowired
         public PollServiceImpl ( PollRepository pollRepository )
@@ -33,6 +37,7 @@ public class PollServiceImpl implements PollService
         }
 
         @Override
+        @Transactional
         public Poll create ( Poll poll )
         {
                 poll.setPostDate( LocalDateTime.now() );
