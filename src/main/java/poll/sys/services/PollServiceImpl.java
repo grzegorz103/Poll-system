@@ -1,6 +1,8 @@
 package poll.sys.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import poll.sys.models.Poll;
 import poll.sys.repositories.PollRepository;
@@ -14,8 +16,6 @@ import java.util.List;
 public class PollServiceImpl implements PollService
 {
         private final PollRepository pollRepository;
-        @Autowired
-        private VoteRepository voteRepository;
 
         @Autowired
         public PollServiceImpl ( PollRepository pollRepository )
@@ -31,9 +31,9 @@ public class PollServiceImpl implements PollService
         }
 
         @Override
-        public List<Poll> findAll ()
+        public Page<Poll> findAll ( Pageable pageable)
         {
-                return pollRepository.findAll();
+                return pollRepository.findAllByOrderByPostDateDesc(pageable);
         }
 
         @Override

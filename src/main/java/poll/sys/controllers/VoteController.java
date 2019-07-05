@@ -23,13 +23,11 @@ public class VoteController
         @PostMapping ("/{id}")
         public void vote ( @PathVariable ("id") int id )
         {
-                System.out.println("POST");
                 voteService.vote( ( long ) id );
         }
 
         @PutMapping
         public void voteAll( @RequestBody List<Long> votes, HttpServletRequest request ){
-                System.out.println("PUT ");
                 voteService.voteAll(votes, request.getRemoteAddr());
         }
 }

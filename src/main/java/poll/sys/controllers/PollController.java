@@ -1,6 +1,8 @@
 package poll.sys.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import poll.sys.models.Poll;
 import poll.sys.services.PollService;
@@ -27,9 +29,9 @@ public class PollController
         }
 
         @GetMapping
-        public List<Poll> getPolls ()
+        public Page<Poll> getPolls ( Pageable pageable )
         {
-                return pollService.findAll();
+                return pollService.findAll( pageable );
         }
 
         @PostMapping

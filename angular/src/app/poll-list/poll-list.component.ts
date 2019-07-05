@@ -16,6 +16,18 @@ export class Vote {
   name: string;
   voteCount: number;
 }
+
+export class PagePoll{
+  content: Poll[];
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  first: boolean;
+  sort: string;
+  numberOfElements: number;
+}
+
 @Component({
   selector: 'app-poll-list',
   templateUrl: './poll-list.component.html',
@@ -24,19 +36,21 @@ export class Vote {
 export class PollListComponent implements OnInit {
 
   polls: Poll[];
+  pagePoll: PagePoll;
+  selectedPage: number = 0;
 
   constructor(
     private pollService: PollService
   ) { }
 
   ngOnInit() {
-    this.fetchData();
+    this.fetchData(0);
   }
 
-  fetchData() {
-    this.pollService.findAll().subscribe(res => {
-    this.polls = res;
-      this.polls.sort((o1, o2) => o2.postDate.toString().localeCompare(o1.postDate.toString()));
+  fetchData(page: number) {
+    this.pollService.findAllPaged(page).subscribe(res => {
+    this.pagePoll = res;
+    //  this.polls.sort((o1, o2) => o2.postDate.toString().localeCompare(o1.postDate.toString()));
     });
   }
 
@@ -48,4 +62,8 @@ export class PollListComponent implements OnInit {
     return count;
   }
 
+  onSelect(page: number){
+    this.selectedPage = page;
+    this.fetchData(page);
+  }
 }

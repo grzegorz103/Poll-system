@@ -30,7 +30,7 @@ public class Poll
         @Column (name = "multiple_answer")
         private boolean multipleAnswer;
 
-        @Column (name = "post_date")
+        @Column (name = "post_date", columnDefinition = "TIMESTAMP NULL")
         private LocalDateTime postDate;
 
         @Column (name = "allow_same_ip")
