@@ -76,4 +76,8 @@ public class VoteServiceImpl implements VoteService
         {
                 return ips.stream().anyMatch( e -> encoder.matches( ip, e ) );
         }
+
+        /*
+        @Scheduled(fixedRate)
+         */
 }

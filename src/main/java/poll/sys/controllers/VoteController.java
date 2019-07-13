@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/poll")
+@RequestMapping ("/api/poll")
 @CrossOrigin
 public class VoteController
 {

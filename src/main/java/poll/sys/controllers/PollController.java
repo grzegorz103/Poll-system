@@ -10,7 +10,7 @@ import poll.sys.services.PollService;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/poll")
+@RequestMapping ("/api/poll")
 @CrossOrigin
 public class PollController
 {

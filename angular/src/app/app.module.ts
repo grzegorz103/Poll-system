@@ -17,6 +17,8 @@ import { PollService } from './poll-list/poll.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PollDetailsComponent } from './poll-details/poll-details.component';
 import { MomentModule } from 'angular2-moment';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { UserService } from './user.service';
 
 
 
@@ -36,7 +38,7 @@ import { MomentModule } from 'angular2-moment';
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

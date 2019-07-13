@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.TimeZone;
 
 @RestController
-@RequestMapping ("/time")
+@RequestMapping ("/api/time")
 @CrossOrigin
 public class TimeController
 {
