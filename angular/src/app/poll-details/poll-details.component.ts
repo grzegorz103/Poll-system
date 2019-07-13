@@ -115,7 +115,6 @@ export class PollDetailsComponent implements OnInit {
       this.showNotification('danger', 'You haven\'t selected any option!', 'pe-7s-info');
       return;
     }
-    alert('cc');
     let selectedVotes = [];
     for (let i = 0; i < this.poll.votes.length; ++i) {
       if (this.selectedItems[i]) {

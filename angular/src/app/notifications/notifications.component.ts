@@ -9,6 +9,7 @@ declare var $:any;
 })
 export class NotificationsComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit() {

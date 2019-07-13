@@ -21,15 +21,13 @@ import { PollService } from 'app/poll-list/poll.service';
 import { PollDetailsComponent } from 'app/poll-details/poll-details.component';
 import { MomentModule } from 'angular2-moment';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     LbdModule,
-    MomentModule,
+    MomentModule, 
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
   ],
   declarations: [
@@ -41,7 +39,7 @@ import { MomentModule } from 'angular2-moment';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    PollListComponent,
+    PollListComponent, 
     PollDetailsComponent
   ],
   providers: [PollService],

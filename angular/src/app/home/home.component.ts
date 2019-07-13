@@ -15,11 +15,10 @@ declare var $: any;
 export class HomeComponent implements OnInit {
 
   poll: Poll;
-  a: boolean[];
+
   constructor(
     private pollService: PollService
   ) {
-    this.a = [];
     this.poll = new Poll();
     this.poll.multipleAnswer = false;
     this.poll.allowSameIp = false;
