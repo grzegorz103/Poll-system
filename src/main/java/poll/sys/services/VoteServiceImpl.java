@@ -1,6 +1,7 @@
 package poll.sys.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import poll.sys.models.Poll;
 import poll.sys.models.Vote;
@@ -18,13 +19,16 @@ public class VoteServiceImpl implements VoteService
 {
         private final VoteRepository voteRepository;
 
-        @Autowired
-        private PollRepository pollRepository;
+        private final PollRepository pollRepository;
+
+        private final BCryptPasswordEncoder encoder;
 
         @Autowired
-        public VoteServiceImpl ( VoteRepository voteRepository )
+        public VoteServiceImpl ( VoteRepository voteRepository, PollRepository pollRepository, BCryptPasswordEncoder encoder )
         {
                 this.voteRepository = voteRepository;
+                this.pollRepository = pollRepository;
+                this.encoder = encoder;
         }
 
         @Override
@@ -56,7 +60,7 @@ public class VoteServiceImpl implements VoteService
                                 {
                                         throw new RuntimeException( "User already voted" );
                                 }
-                                poll.getUsersIps().add( ip );
+                                poll.getUsersIps().add( encoder.encode( ip ) );
                         }
                         votes.stream()
                                 .map( voteRepository::findById )
@@ -70,6 +74,6 @@ public class VoteServiceImpl implements VoteService
 
         private boolean isAlreadyVoted ( Set<String> ips, String ip )
         {
-                return ips.contains( ip );
+                return ips.stream().anyMatch( e -> encoder.matches( ip, e ) );
         }
 }
