@@ -12,7 +12,7 @@ export class PollService {
   constructor(
     private http: HttpClient
   ) {
-    this.url = 'http://localhost:8080/poll/';
+    this.url = '/poll/';
   }
 
   findAll() {
@@ -20,7 +20,7 @@ export class PollService {
   }
 
   findAllPaged(page: number) {
-    let urlWithParam = 'http://localhost:8080/poll?page=' + page + '&size=4';
+    let urlWithParam = '/poll?page=' + page + '&size=4';
     return this.http.get<PagePoll>(urlWithParam);
   }
 
@@ -37,6 +37,6 @@ export class PollService {
   }
 
   getTime(){
-    return this.http.get('http://localhost:8080/time')
+    return this.http.get('/time')
   }
 }
