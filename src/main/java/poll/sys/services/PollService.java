@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import poll.sys.models.Poll;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface PollService
@@ -13,4 +14,6 @@ public interface PollService
         Page<Poll> findAll ( Pageable pageable );
 
         Poll create ( Poll poll );
+
+        Page<Poll> findByUser ( Pageable pageable );
 }

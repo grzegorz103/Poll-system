@@ -11,13 +11,17 @@
                 </div>
             </div>
 
-            <input class="form-check-input" type="checkbox" [(ngModel)]="poll.multipleAnswer" name="multipleAnswer">
-            <span class="form-check-sign"></span>
-            Allow multiple answers
-
-            <input class="form-check-input" type="checkbox" [(ngModel)]="poll.allowSameIp" name="allowSameIp">
-            <span class="form-check-sign"></span>
-            Allow multiple votes from same IP
+            <div class="row">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="poll.multipleAnswer" name="multipleAnswer">
+                <span class="form-check-sign"></span>
+                Allow multiple answers
+            </div>
+            
+            <div class="row">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="poll.allowSameIp" name="allowSameIp">
+                <span class="form-check-sign"></span>
+                Allow multiple votes from same IP
+            </div>
 
             <hr>
             Poll options

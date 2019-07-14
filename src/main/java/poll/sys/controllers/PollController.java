@@ -3,10 +3,12 @@ package poll.sys.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import poll.sys.models.Poll;
 import poll.sys.services.PollService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -23,7 +25,7 @@ public class PollController
         }
 
         @GetMapping ("/{id}")
-        public Poll getPoll ( @PathVariable long id )
+        public Poll getPollById ( @PathVariable long id )
         {
                 return pollService.findOne( id );
         }
@@ -33,6 +35,15 @@ public class PollController
         {
                 return pollService.findAll( pageable );
         }
+
+        /*
+        @PreAuthorize ("isAuthenticated()")
+        @GetMapping ("/my/0")
+        public Page<Poll> getUserPolls ( Pageable pageable )
+        {
+                return pollService.findByUser( pageable );
+        }
+        */
 
         @PostMapping
         public Poll save ( @RequestBody Poll poll )

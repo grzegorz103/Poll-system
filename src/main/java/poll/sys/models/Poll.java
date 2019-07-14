@@ -39,4 +39,11 @@ public class Poll
         @Column (name = "ips")
         @ElementCollection (targetClass = String.class)
         private Set<String> usersIps;
+
+        @ManyToOne
+        private User creator;
+
+        @Column(name="private")
+        private boolean nonPublic;
+
 }
