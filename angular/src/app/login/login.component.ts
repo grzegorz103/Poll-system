@@ -13,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   model: any = {};
   loginIncorrect: boolean;
-
+  loading: any;
+  
   constructor(
     private router: Router,
     private http: HttpClient,
