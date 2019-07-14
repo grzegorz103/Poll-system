@@ -19,6 +19,7 @@ import { PollDetailsComponent } from './poll-details/poll-details.component';
 import { MomentModule } from 'angular2-moment';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserService } from './user.service';
+import { LoginComponent } from './login/login.component';
 
 
 

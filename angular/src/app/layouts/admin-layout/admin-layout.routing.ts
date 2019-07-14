@@ -11,6 +11,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { PollListComponent } from 'app/poll-list/poll-list.component';
 import { PollDetailsComponent } from 'app/poll-details/poll-details.component';
 import { UserRegistrationComponent } from 'app/user-registration/user-registration.component';
+import { LoginComponent } from 'app/login/login.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: HomeComponent },
@@ -23,5 +24,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade',        component: UpgradeComponent },
     {path:'poll', component: PollListComponent},
     { path: 'poll/:id', component: PollDetailsComponent},
-    { path: 'signup',       component: UserRegistrationComponent}
+    { path: 'signup',       component: UserRegistrationComponent},
+    { path: 'login',        component: LoginComponent}
 ];

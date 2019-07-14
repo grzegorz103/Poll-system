@@ -22,6 +22,7 @@ import { PollDetailsComponent } from 'app/poll-details/poll-details.component';
 import { MomentModule } from 'angular2-moment';
 import { NavbarComponent } from 'app/shared/navbar/navbar.component';
 import { UserRegistrationComponent } from 'app/user-registration/user-registration.component';
+import { LoginComponent } from 'app/login/login.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { UserRegistrationComponent } from 'app/user-registration/user-registrati
     UpgradeComponent,
     PollListComponent, 
     PollDetailsComponent,
-    UserRegistrationComponent
+    UserRegistrationComponent,
+    LoginComponent
   ],
   providers: [PollService],
 })
