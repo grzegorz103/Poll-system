@@ -12,6 +12,7 @@ import { PollListComponent } from 'app/poll-list/poll-list.component';
 import { PollDetailsComponent } from 'app/poll-details/poll-details.component';
 import { UserRegistrationComponent } from 'app/user-registration/user-registration.component';
 import { LoginComponent } from 'app/login/login.component';
+import { PollUsersComponent } from 'app/poll-users/poll-users.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: HomeComponent },
@@ -25,5 +26,6 @@ export const AdminLayoutRoutes: Routes = [
     {path:'poll', component: PollListComponent},
     { path: 'poll/:id', component: PollDetailsComponent},
     { path: 'signup',       component: UserRegistrationComponent},
-    { path: 'login',        component: LoginComponent}
+    { path: 'login',        component: LoginComponent},
+    { path: 'poll/my/all',      component: PollUsersComponent }
 ];

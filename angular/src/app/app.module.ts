@@ -14,13 +14,15 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { PollListComponent } from './poll-list/poll-list.component';
 import { PollService } from './poll-list/poll.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PollDetailsComponent } from './poll-details/poll-details.component';
 import { MomentModule } from 'angular2-moment';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserService } from './user.service';
 import { LoginComponent } from './login/login.component';
-
+import { AuthService } from './auth.service';
+import { RequestInterceptorService } from './request-interceptor.service';
+import { PollUsersComponent } from './poll-users/poll-users.component';
 
 
 @NgModule({
@@ -39,7 +41,11 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     AdminLayoutComponent,
   ],
-  providers: [UserService],
+  providers: [UserService, AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: RequestInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
