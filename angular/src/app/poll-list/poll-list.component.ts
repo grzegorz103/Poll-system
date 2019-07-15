@@ -3,6 +3,7 @@ import { PollService } from './poll.service';
 import { TimeAgoPipe } from 'angular2-moment';
 import moment = require('moment');
 import * as m from 'moment-timezone';
+
 export class Poll {
   id: number;
   name: string;
@@ -10,7 +11,7 @@ export class Poll {
   multipleAnswer: boolean;
   postDate: Date;
   allowSameIp: boolean;
-  private: boolean;
+  nonPublic: boolean;
   code: string;
 }
 

@@ -24,6 +24,7 @@ import { NavbarComponent } from 'app/shared/navbar/navbar.component';
 import { UserRegistrationComponent } from 'app/user-registration/user-registration.component';
 import { LoginComponent } from 'app/login/login.component';
 import { PollUsersComponent } from 'app/poll-users/poll-users.component';
+import { AuthService } from 'app/auth.service';
 
 @NgModule({
   imports: [

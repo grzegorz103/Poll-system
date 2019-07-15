@@ -11,21 +11,43 @@
                 </div>
             </div>
 
+            <hr>
+
             <div class="row">
-                <input class="form-check-input" type="checkbox" [(ngModel)]="poll.multipleAnswer" name="multipleAnswer">
-                <span class="form-check-sign"></span>
-                Allow multiple answers
+                <div class="col-sm-6">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="poll.multipleAnswer"
+                        name="multipleAnswer">
+                    <span class="form-check-sign"></span>
+                    Allow multiple answers
+                </div>
             </div>
-            
             <div class="row">
-                <input class="form-check-input" type="checkbox" [(ngModel)]="poll.allowSameIp" name="allowSameIp">
-                <span class="form-check-sign"></span>
-                Allow multiple votes from same IP
+                <div class="col-sm-6">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="poll.allowSameIp" name="allowSameIp">
+                    <span class="form-check-sign"></span>
+                    Allow multiple votes from same IP
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <input [disabled]="!authService.isAuthenticated()" class="form-check-input" type="checkbox"
+                        [(ngModel)]="poll.nonPublic" name="nonPublic">
+                    <span class="form-check-sign"></span>
+                    <span *ngIf="!authService.isAuthenticated()">
+                        <span data-toggle="tooltip" data-placement="top" title="Available only for registered users">
+                            Private (accessible only via direct link)
+                        </span>
+                    </span>
+                    <span *ngIf="authService.isAuthenticated()">
+                        Private (accessible only via direct link)
+                    </span>
+                </div>
             </div>
 
             <hr>
-            Poll options
-            <a class="btn btn-info" style="margin-bottom:1%" (click)="add()">Add new vote</a>
+
+            <a class="btn btn-info" style="margin-bottom:1%" (click)="add()">Add new option</a>
             <div *ngFor="let vote of poll.votes; let i=index">
                 <div class="form-group">
                     <label>Option #{{i + 1}}
