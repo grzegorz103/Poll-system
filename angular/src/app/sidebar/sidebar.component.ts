@@ -7,7 +7,7 @@ declare interface RouteInfo {
   title: string;
   icon: string;
   class: string;
-  authRequired;
+  authRequired: boolean;
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'New poll', icon: 'pe-7s-graph', class: '', authRequired: false },

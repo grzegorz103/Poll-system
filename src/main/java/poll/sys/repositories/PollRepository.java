@@ -13,7 +13,7 @@ public interface PollRepository extends JpaRepository<Poll, Long>
 
         Page<Poll> findAllByNonPublicFalseOrderByPostDateDesc ( Pageable pageable );
 
-        Page<Poll> findAllByCreator ( Pageable pageable, User currentUser );
+        Page<Poll> findAllByCreatorOrderByPostDateDesc ( Pageable pageable, User currentUser );
 
         Poll findByCode(String code);
 }

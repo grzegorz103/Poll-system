@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private pollService: PollService,
-    private authService: AuthService
+    public authService: AuthService
   ) {
     this.poll = new Poll();
     this.poll.multipleAnswer = false;

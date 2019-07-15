@@ -12,6 +12,7 @@ export class PollUsersComponent implements OnInit {
 
   pagePoll: PagePoll;
   serverTime: any;
+  selectedPage: number = 0;
 
 
   constructor(
@@ -49,5 +50,10 @@ export class PollUsersComponent implements OnInit {
       poll.votes.forEach(e => count += e.voteCount);
     }
     return count;
+  }
+
+  onSelect(page: number) {
+    this.selectedPage = page;
+    this.fetchData(page);
   }
 }

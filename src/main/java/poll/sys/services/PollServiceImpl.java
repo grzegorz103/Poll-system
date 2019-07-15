@@ -68,7 +68,7 @@ public class PollServiceImpl implements PollService
         public Page<Poll> findByUser ( Pageable pageable )
         {
                 User currentUser = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                return pollRepository.findAllByCreator( pageable, currentUser );
+                return pollRepository.findAllByCreatorOrderByPostDateDesc( pageable, currentUser );
         }
 
         private String generateRandomString ( int length )

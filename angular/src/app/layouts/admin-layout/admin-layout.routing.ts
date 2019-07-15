@@ -15,17 +15,17 @@ import { LoginComponent } from 'app/login/login.component';
 import { PollUsersComponent } from 'app/poll-users/poll-users.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'dashboard',      component: HomeComponent },
-    { path: 'user',           component: UserComponent },
-    { path: 'table',          component: TablesComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
-    {path:'poll', component: PollListComponent},
-    { path: 'poll/:id', component: PollDetailsComponent},
-    { path: 'signup',       component: UserRegistrationComponent},
-    { path: 'login',        component: LoginComponent},
-    { path: 'poll/my/all',      component: PollUsersComponent }
+    { path: 'dashboard', component: HomeComponent },
+    { path: 'user', component: UserComponent },
+    { path: 'table', component: TablesComponent },
+    { path: 'typography', component: TypographyComponent },
+    { path: 'icons', component: IconsComponent },
+    { path: 'maps', component: MapsComponent },
+    { path: 'notifications', component: NotificationsComponent },
+    { path: 'upgrade', component: UpgradeComponent },
+    { path: 'poll', component: PollListComponent },
+    { path: 'poll/:id', component: PollDetailsComponent },
+    { path: 'signup', component: UserRegistrationComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'poll/my/all', component: PollUsersComponent }
 ];

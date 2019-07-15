@@ -19,7 +19,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let poll of pagePoll.content">
+                <tr *ngFor="let poll of pagePoll?.content">
                   <td>{{poll.id}}</td>
                   <td>{{poll.name}}</td>
                   <td>{{poll.postDate | amTimeAgo }}</td>
@@ -33,8 +33,8 @@
                 <li *ngFor="let page of ' '.repeat(pagePoll.totalPages).split(''), let i = index " (click)="onSelect(i)"
                 [class.active]="i === selectedPage" class="page-item"><a class="page-link" style="cursor: pointer">{{i}}</a></li>
                 </ul>
-
               </nav>
+
           </div>
         </div>
       </div>
