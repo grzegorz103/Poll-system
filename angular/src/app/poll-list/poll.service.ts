@@ -24,6 +24,11 @@ export class PollService {
     return this.http.get<PagePoll>(urlWithParam);
   }
 
+  findByUser(page: number){
+    let urlWithParam= 'http://localhost:8080/api/poll/my/all?page=' + page + '&size=4';
+    return this.http.get<PagePoll>(urlWithParam);
+  }
+
   findById(id: number) {
     return this.http.get<Poll>(this.url + id);
   }

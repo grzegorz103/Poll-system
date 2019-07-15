@@ -36,14 +36,14 @@ public class PollController
                 return pollService.findAllPublic( pageable );
         }
 
-        /*
+
         @PreAuthorize ("isAuthenticated()")
-        @GetMapping ("/my/")
+        @GetMapping ("/my/all")
         public Page<Poll> getUserPolls ( Pageable pageable )
         {
                 return pollService.findByUser( pageable );
         }
-        */
+
 
         @PostMapping
         public Poll save ( @RequestBody Poll poll )
