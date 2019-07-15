@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface PollService
 {
-        Poll findOne ( Long id );
+        Poll findOneByCode ( String code );
 
-        Page<Poll> findAll ( Pageable pageable );
+        Page<Poll> findAllPublic ( Pageable pageable );
 
         Poll create ( Poll poll );
 

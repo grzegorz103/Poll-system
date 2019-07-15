@@ -6,5 +6,5 @@ public interface VoteService
 {
         void vote ( Long id );
 
-        void voteAll ( List<Long> votes, String ip );
+        void voteAll ( List<String> voteCodes, String ip );
 }

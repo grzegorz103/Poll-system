@@ -10,12 +10,15 @@ export class Poll {
   multipleAnswer: boolean;
   postDate: Date;
   allowSameIp: boolean;
+  private: boolean;
+  code: string;
 }
 
 export class Vote {
   id: number;
   name: string;
   voteCount: number;
+  code: string;
 }
 
 export class PagePoll {

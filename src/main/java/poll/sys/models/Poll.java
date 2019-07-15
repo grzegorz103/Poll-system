@@ -43,7 +43,10 @@ public class Poll
         @ManyToOne
         private User creator;
 
-        @Column(name="private")
+        @Column (name = "private")
         private boolean nonPublic;
+
+        @Column (name = "code")
+        private String code;
 
 }

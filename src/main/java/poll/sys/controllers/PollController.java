@@ -24,21 +24,21 @@ public class PollController
                 this.pollService = pollService;
         }
 
-        @GetMapping ("/{id}")
-        public Poll getPollById ( @PathVariable long id )
+        @GetMapping ("/{code}")
+        public Poll getPollByCode ( @PathVariable String code )
         {
-                return pollService.findOne( id );
+                return pollService.findOneByCode( code );
         }
 
         @GetMapping
-        public Page<Poll> getPolls ( Pageable pageable )
+        public Page<Poll> getPublicPolls ( Pageable pageable )
         {
-                return pollService.findAll( pageable );
+                return pollService.findAllPublic( pageable );
         }
 
         /*
         @PreAuthorize ("isAuthenticated()")
-        @GetMapping ("/my/0")
+        @GetMapping ("/my/")
         public Page<Poll> getUserPolls ( Pageable pageable )
         {
                 return pollService.findByUser( pageable );

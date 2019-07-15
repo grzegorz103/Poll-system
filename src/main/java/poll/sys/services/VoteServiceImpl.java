@@ -49,11 +49,11 @@ public class VoteServiceImpl implements VoteService
         }
 
         @Override
-        public void voteAll ( List<Long> votes, String ip )
+        public void voteAll ( List<String> voteCodes, String ip )
         {
-                if ( votes != null && !votes.isEmpty() )
+                if ( voteCodes != null && !voteCodes.isEmpty() )
                 {
-                        Poll poll = pollRepository.findByVotes( voteRepository.findById( votes.get( 0 ) ).get() );
+                        Poll poll = pollRepository.findByVotes( voteRepository.findByCode( voteCodes.get( 0 ) ).get() );
                         if ( poll != null )
                         {
                                 if ( !poll.isAllowSameIp() && isAlreadyVoted( poll.getUsersIps(), ip ) )
@@ -62,8 +62,8 @@ public class VoteServiceImpl implements VoteService
                                 }
                                 poll.getUsersIps().add( encoder.encode( ip ) );
                         }
-                        votes.stream()
-                                .map( voteRepository::findById )
+                        voteCodes.stream()
+                                .map( voteRepository::findByCode )
                                 .map( Optional::get )
                                 .forEach( e -> {
                                         e.setVoteCount( e.getVoteCount() + 1 );

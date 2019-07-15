@@ -118,7 +118,7 @@ export class PollDetailsComponent implements OnInit {
     let selectedVotes = [];
     for (let i = 0; i < this.poll.votes.length; ++i) {
       if (this.selectedItems[i]) {
-        selectedVotes.push(this.poll.votes[i].id);
+        selectedVotes.push(this.poll.votes[i].code);
          /* this.pollService.vote(this.poll.votes[i].id).subscribe(res => this.success = true, err =>this.success = false);
          if (!this.success) {
            this.showNotification('danger', 'You have already voted in this poll!', 'pe-7s-info');

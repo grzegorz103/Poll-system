@@ -21,4 +21,6 @@ public class Vote
 
         private int voteCount;
 
+        @Column (name = "code")
+        private String code;
 }

@@ -27,7 +27,7 @@ public class VoteController
         }
 
         @PutMapping
-        public void voteAll( @RequestBody List<Long> votes, HttpServletRequest request ){
-                voteService.voteAll(votes, request.getRemoteAddr());
+        public void voteAll( @RequestBody List<String> voteCodes, HttpServletRequest request ){
+                voteService.voteAll(voteCodes, request.getRemoteAddr());
         }
 }
