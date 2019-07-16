@@ -1,6 +1,5 @@
 package poll.sys.models;
 
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
