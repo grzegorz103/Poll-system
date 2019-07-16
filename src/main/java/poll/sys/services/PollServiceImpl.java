@@ -30,10 +30,13 @@ public class PollServiceImpl implements PollService
 
         private final int VOTE_CODE_LENGTH = 10;
 
+        private final NotificationService notificationService;
+
         @Autowired
-        public PollServiceImpl ( PollRepository pollRepository )
+        public PollServiceImpl ( PollRepository pollRepository, NotificationService notificationService )
         {
                 this.pollRepository = pollRepository;
+                this.notificationService = notificationService;
         }
 
 
@@ -53,15 +56,21 @@ public class PollServiceImpl implements PollService
         @Transactional
         public Poll create ( @NotNull Poll poll )
         {
+                boolean userLogged = false;
                 if ( SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User )
                 {
+                        userLogged = true;
                         User currentUser = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                         poll.setCreator( currentUser );
                 }
                 poll.setCode( generateRandomString( POLL_CODE_LENGTH ) );
                 poll.setPostDate( LocalDateTime.now() );
                 poll.getVotes().forEach( e -> e.setCode( generateRandomString( VOTE_CODE_LENGTH ) ) );
-                return pollRepository.save( poll );
+
+                Poll savedPoll = pollRepository.save( poll );
+                if ( userLogged )
+                        notificationService.create( savedPoll );
+                return savedPoll;
         }
 
         @Override

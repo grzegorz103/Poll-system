@@ -1,11 +1,20 @@
 package poll.sys.models;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "notification")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Notification
 {
         @Id
@@ -22,6 +31,6 @@ public class Notification
         private LocalDateTime createdAt;
 
         @ManyToOne
-        @JoinColumn (name = "user_id")
-        private User user;
+        @JoinColumn (name = "poll_id")
+        private Poll poll;
 }
