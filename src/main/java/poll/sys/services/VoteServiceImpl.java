@@ -39,7 +39,6 @@ public class VoteServiceImpl implements VoteService
                 System.out.println( poll == null );
                 if ( poll != null )
                 {
-                        System.out.println( "CCCCC" );
                         //         if ( !poll.isAllowSameIp() && isAlreadyVoted( poll.getUsersIps() ) )
                         throw new RuntimeException( "User has already voted" );
                         //           poll.getUsersIps().add( getCurrentIP() );

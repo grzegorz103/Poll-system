@@ -4,14 +4,15 @@
             <div class="logo-img">
                 <img src="/assets/img/angular2-logo-white.png" />
             </div>
-            Fast poll
+            Hot poll
         </a>
     </div>
     <ul class="nav responsive-nav">
+        <!--
         <li *ngIf="isMobileMenu()">
             <a class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-dashboard"></i>
-                <p class="hidden-lg hidden-md">Dashboard</p>
+                <p class="hidden-lg hidden-md">Create fast and easy polls!</p>
             </a>
         </li>
         <li class="dropdown" *ngIf="isMobileMenu()">
@@ -61,13 +62,10 @@
                 <li><a href="#">Separated link</a></li>
             </ul>
         </li>
-        <li *ngIf="isMobileMenu()">
-            <a>
-                <p>Log out</p>
-            </a>
-        </li>
-        <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
-        <li routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            -->
+
+        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" *ngFor="let menuItem of menuItems"
+            class="{{menuItem.class}}">
             <a *ngIf="!menuItem.authRequired" [routerLink]="[menuItem.path]">
                 <i class="{{menuItem.icon}}"></i>
                 <p>{{menuItem.title}}</p>
@@ -75,6 +73,27 @@
             <a *ngIf="menuItem.authRequired && authService.isAuthenticated()" [routerLink]="[menuItem.path]">
                 <i class="{{menuItem.icon}}"></i>
                 <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+        <li class="separator hidden-lg hidden-md" *ngIf="isMobileMenu()"></li>
+
+        <li *ngIf="isMobileMenu() && !authService.isAuthenticated()">
+            <a routerLink="/login">
+                <i class="pe-7s-up-arrow"></i>
+                <p>Login</p>
+            </a>
+        </li>
+
+        <li routerLinkActive="active" *ngIf="isMobileMenu() && !authService.isAuthenticated()">
+            <a routerLink="/signup">
+                <i class="pe-7s-add-user"></i>
+                <p>Sign up!</p>
+            </a>
+        </li>
+
+        <li *ngIf="isMobileMenu() && authService.isAuthenticated()">
+            <a>
+                <p>Log out</p>
             </a>
         </li>
     </ul>

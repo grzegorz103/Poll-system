@@ -1,4 +1,4 @@
-/*package poll.sys.models;
+package poll.sys.models;
 
 import org.springframework.security.core.userdetails.User;
 
@@ -26,4 +26,3 @@ public class Notification
         @JoinColumn (name = "user_id")
         private User user;
 }
-*/
