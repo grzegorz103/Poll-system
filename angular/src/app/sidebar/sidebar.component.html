@@ -92,7 +92,8 @@
         </li>
 
         <li *ngIf="isMobileMenu() && authService.isAuthenticated()">
-            <a>
+            <a style="cursor:pointer" (click)="logout()">
+                <i class="pe-7s-next-2"></i>
                 <p>Log out</p>
             </a>
         </li>
