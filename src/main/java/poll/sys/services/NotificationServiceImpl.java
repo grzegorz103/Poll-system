@@ -10,6 +10,7 @@ import poll.sys.repositories.NotificationRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service ("notificationService")
 public class NotificationServiceImpl implements NotificationService
@@ -31,7 +32,7 @@ public class NotificationServiceImpl implements NotificationService
                 {
                         user = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
                         if ( user != null )
-                                return notificationRepository.findAllByPoll_Creator( user );
+                                return notificationRepository.findAllByPoll_CreatorOrderByCreatedAtDesc( user );
 
                 }
                 return null;
@@ -54,5 +55,23 @@ public class NotificationServiceImpl implements NotificationService
         public boolean update ()
         {
                 return false;
+        }
+
+        @Override
+        public List<Notification> readByUser ()
+        {
+                User user;
+
+                if ( SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User )
+                {
+                        user = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                        return notificationRepository.findAllByPoll_CreatorOrderByCreatedAtDesc( user )
+                                .stream()
+                                .map( e -> {
+                                        e.setRead( true );
+                                        return notificationRepository.save( e );
+                                } ).collect( Collectors.toList() );
+                }
+                return null;
         }
 }

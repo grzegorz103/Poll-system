@@ -68,8 +68,8 @@ public class PollServiceImpl implements PollService
                 poll.getVotes().forEach( e -> e.setCode( generateRandomString( VOTE_CODE_LENGTH ) ) );
 
                 Poll savedPoll = pollRepository.save( poll );
-                if ( userLogged )
-                        notificationService.create( savedPoll );
+              //  if ( userLogged )
+            //            notificationService.create( savedPoll );
                 return savedPoll;
         }
 

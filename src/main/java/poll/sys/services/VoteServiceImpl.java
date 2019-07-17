@@ -21,14 +21,17 @@ public class VoteServiceImpl implements VoteService
 
         private final PollRepository pollRepository;
 
+        private final NotificationService notificationService;
+
         private final BCryptPasswordEncoder encoder;
 
         @Autowired
-        public VoteServiceImpl ( VoteRepository voteRepository, PollRepository pollRepository, BCryptPasswordEncoder encoder )
+        public VoteServiceImpl ( VoteRepository voteRepository, PollRepository pollRepository, BCryptPasswordEncoder encoder, NotificationService notificationService )
         {
                 this.voteRepository = voteRepository;
                 this.pollRepository = pollRepository;
                 this.encoder = encoder;
+                this.notificationService = notificationService;
         }
 
         @Override
@@ -60,6 +63,7 @@ public class VoteServiceImpl implements VoteService
                                         throw new RuntimeException( "User already voted" );
                                 }
                                 poll.getUsersIps().add( encoder.encode( ip ) );
+                                notificationService.create( poll );
                         }
                         voteCodes.stream()
                                 .map( voteRepository::findByCode )

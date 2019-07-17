@@ -12,4 +12,6 @@ public interface NotificationService
         boolean create (Poll poll);
 
         boolean update ();
+
+        List<Notification> readByUser();
 }

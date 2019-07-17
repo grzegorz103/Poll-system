@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long>
 {
-        List<Notification> findAllByPoll_Creator ( User user );
+        List<Notification> findAllByPoll_CreatorOrderByCreatedAtDesc ( User user );
 }

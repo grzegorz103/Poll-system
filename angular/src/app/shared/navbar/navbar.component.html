@@ -17,24 +17,32 @@
                         <p class="hidden-lg hidden-md">{{getTitle()}}</p>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <li #myDropdown=dropdown dropdown style="cursor:pointer">
+                    <a class="dropdown-toggle" *ngIf="authService.isAuthenticated()"  dropdownToggle>
                         <i class="fa fa-globe"></i>
                         <b class="caret"></b>
-                        <span class="notification hidden-sm hidden-xs">5</span>
+                        <span class="notification hidden-sm hidden-xs">{{ notificationMap?.size }}</span>
                         <p class="hidden-lg hidden-md">
-                            5 Notifications
+                            {{ notificationMap?.size }} Notifications
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Notification 1</a></li>
-                        <li><a href="#">Notification 2</a></li>
-                        <li><a href="#">Notification 3</a></li>
-                        <li><a href="#">Notification 4</a></li>
-                        <li><a href="#">Another notification</a></li>
+                    <ul class="dropdown-menu" *ngIf="authService.isAuthenticated()" dropdownMenu>
+                        <li *ngFor="let notification of notificationMap | keyvalue">
+                            <a
+                                [routerLink]="'/poll/'+notification.key.poll.code">{{ notification.key.message }}({{ notification.value }})</a>
+                        </li>
+                        <li *ngIf="notificationMap?.size === 0"><a>No notifications</a></li>
                     </ul>
                 </li>
+              <!-- <div #myDropdown=dropdown dropdown>
+                    <h1 class="dropdown-toggle" dropdownToggle>Angular Custom Dropdown ▼</h1>
+                    <ul class="dropdown-menu" dropdownMenu>
+                        <li><a class="neat" href="https://github.com/zurfyx/angular-custom-modal" rel="noopener"
+                                target="_blank">Check it out @ GitHub</a></li>
+                        <li><a class="neat" href="#">...</a></li>
+                    </ul>
+                </div>-->
                 <li>
                     <a href="#">
                         <i class="fa fa-search"></i>

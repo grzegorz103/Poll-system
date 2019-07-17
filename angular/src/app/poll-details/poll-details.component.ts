@@ -42,8 +42,10 @@ export class PollDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rt.params.subscribe(params => this.urlId = params['id']);
-    this.fetchData();
+    this.rt.params.subscribe(params => {
+      this.urlId = params['id'];
+      this.fetchData();
+    });
   }
 
   fetchData() {
@@ -119,16 +121,16 @@ export class PollDetailsComponent implements OnInit {
     for (let i = 0; i < this.poll.votes.length; ++i) {
       if (this.selectedItems[i]) {
         selectedVotes.push(this.poll.votes[i].code);
-         /* this.pollService.vote(this.poll.votes[i].id).subscribe(res => this.success = true, err =>this.success = false);
-         if (!this.success) {
-           this.showNotification('danger', 'You have already voted in this poll!', 'pe-7s-info');
-           return;
-         }*/
+        /* this.pollService.vote(this.poll.votes[i].id).subscribe(res => this.success = true, err =>this.success = false);
+        if (!this.success) {
+          this.showNotification('danger', 'You have already voted in this poll!', 'pe-7s-info');
+          return;
+        }*/
       }
     }
     this.pollService.vote(selectedVotes).subscribe(res =>
       this.showNotification('success', 'Thank you for voting', 'pe-7s-smile'),
-      err =>  this.showNotification('danger', 'You have alredy voted in this poll!', 'pe-7s-info'));
+      err => this.showNotification('danger', 'You have alredy voted in this poll!', 'pe-7s-info'));
     //  this.showNotification('success', 'Thank you for voting', 'pe-7s-smile');
   }
 
