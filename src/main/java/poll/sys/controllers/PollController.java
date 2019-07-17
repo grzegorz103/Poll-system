@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import poll.sys.dto.PollDTO;
 import poll.sys.models.Poll;
 import poll.sys.services.PollService;
 
@@ -25,13 +26,13 @@ public class PollController
         }
 
         @GetMapping ("/{code}")
-        public Poll getPollByCode ( @PathVariable String code )
+        public PollDTO getPollByCode ( @PathVariable String code )
         {
                 return pollService.findOneByCode( code );
         }
 
         @GetMapping
-        public Page<Poll> getPublicPolls ( Pageable pageable )
+        public Page<PollDTO> getPublicPolls ( Pageable pageable )
         {
                 return pollService.findAllPublic( pageable );
         }
@@ -39,14 +40,14 @@ public class PollController
 
         @PreAuthorize ("isAuthenticated()")
         @GetMapping ("/my/all")
-        public Page<Poll> getUserPolls ( Pageable pageable )
+        public Page<PollDTO> getUserPolls ( Pageable pageable )
         {
                 return pollService.findByUser( pageable );
         }
 
 
         @PostMapping
-        public Poll save ( @RequestBody Poll poll )
+        public PollDTO save ( @RequestBody PollDTO poll )
         {
                 return pollService.create( poll );
         }

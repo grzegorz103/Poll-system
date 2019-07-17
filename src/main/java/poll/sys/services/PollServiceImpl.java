@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import poll.sys.dto.PollDTO;
+import poll.sys.mappers.PollMapper;
 import poll.sys.models.Poll;
 import poll.sys.models.User;
 import poll.sys.repositories.PollRepository;
@@ -32,52 +34,58 @@ public class PollServiceImpl implements PollService
 
         private final NotificationService notificationService;
 
+        private final PollMapper pollMapper;
+
         @Autowired
-        public PollServiceImpl ( PollRepository pollRepository, NotificationService notificationService )
+        public PollServiceImpl ( PollRepository pollRepository, NotificationService notificationService, PollMapper pollMapper )
         {
                 this.pollRepository = pollRepository;
                 this.notificationService = notificationService;
+                this.pollMapper = pollMapper;
         }
 
 
         @Override
-        public Poll findOneByCode ( String code )
+        public PollDTO findOneByCode ( String code )
         {
-                return pollRepository.findByCode( code );
+                return pollMapper.pollToDTO( pollRepository.findByCode( code ) );
         }
 
         @Override
-        public Page<Poll> findAllPublic ( Pageable pageable )
+        public Page<PollDTO> findAllPublic ( Pageable pageable )
         {
-                return pollRepository.findAllByNonPublicFalseOrderByPostDateDesc( pageable );
+                return pollRepository.findAllByNonPublicFalseOrderByPostDateDesc( pageable )
+                        .map( pollMapper::pollToDTO );
         }
 
         @Override
         @Transactional
-        public Poll create ( @NotNull Poll poll )
+        public PollDTO create ( @NotNull PollDTO poll )
         {
+                Poll pollToSave = pollMapper.pollDTOtoPoll( poll );
                 boolean userLogged = false;
                 if ( SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User )
                 {
                         userLogged = true;
                         User currentUser = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                        poll.setCreator( currentUser );
+                        pollToSave.setCreator( currentUser );
                 }
-                poll.setCode( generateRandomString( POLL_CODE_LENGTH ) );
-                poll.setPostDate( LocalDateTime.now() );
-                poll.getVotes().forEach( e -> e.setCode( generateRandomString( VOTE_CODE_LENGTH ) ) );
+                pollToSave.setCode( generateRandomString( POLL_CODE_LENGTH ) );
+                pollToSave.setPostDate( LocalDateTime.now() );
+                pollToSave.getVotes().forEach( e -> e.setCode( generateRandomString( VOTE_CODE_LENGTH ) ) );
 
-                Poll savedPoll = pollRepository.save( poll );
-              //  if ( userLogged )
-            //            notificationService.create( savedPoll );
-                return savedPoll;
+                Poll savedPoll = pollRepository.save( pollToSave );
+                //  if ( userLogged )
+                //            notificationService.create( savedPoll );
+                return pollMapper.pollToDTO( savedPoll );
         }
 
         @Override
-        public Page<Poll> findByUser ( Pageable pageable )
+        public Page<PollDTO> findByUser ( Pageable pageable )
         {
                 User currentUser = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                return pollRepository.findAllByCreatorOrderByPostDateDesc( pageable, currentUser );
+                return pollRepository.findAllByCreatorOrderByPostDateDesc( pageable, currentUser )
+                        .map( pollMapper::pollToDTO );
         }
 
         private String generateRandomString ( int length )
