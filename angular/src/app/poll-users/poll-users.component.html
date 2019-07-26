@@ -18,7 +18,7 @@
                                     <th>Multiple answers</th>
                                     <th>Same IP allowed</th>
                                     <th>Private</th>
-                                    <th>Open</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,8 @@
                                                 [attr.for]="'nonPublic'+i"></label>
                                         </div>
                                     </td>
-                                    <td><a [routerLink]="['/poll', poll.code]" class="btn btn-success">Vote!</a></td>
+                                    <td><a [routerLink]="['/poll', poll.code]" class="btn btn-success">Vote!</a>
+                                    <button (click)="copyToClipboard(poll.code)" class="btn btn-info" style="margin-left: 2%">Copy link</button></td>
                                 </tr>
                             </tbody>
                         </table>
