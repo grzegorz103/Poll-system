@@ -16,4 +16,6 @@ public interface PollRepository extends JpaRepository<Poll, Long>
         Page<Poll> findAllByCreatorOrderByPostDateDesc ( Pageable pageable, User currentUser );
 
         Poll findByCode(String code);
+
+        boolean existsByCode(String code);
 }

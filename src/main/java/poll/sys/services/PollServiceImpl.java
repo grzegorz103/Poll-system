@@ -18,7 +18,9 @@ import javax.validation.constraints.NotNull;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
@@ -36,12 +38,15 @@ public class PollServiceImpl implements PollService
 
         private final PollMapper pollMapper;
 
+        private final VoteRepository voteRepository;
+
         @Autowired
-        public PollServiceImpl ( PollRepository pollRepository, NotificationService notificationService, PollMapper pollMapper )
+        public PollServiceImpl ( PollRepository pollRepository, NotificationService notificationService, PollMapper pollMapper, VoteRepository voteRepository )
         {
                 this.pollRepository = pollRepository;
                 this.notificationService = notificationService;
                 this.pollMapper = pollMapper;
+                this.voteRepository = voteRepository;
         }
 
 
@@ -88,8 +93,45 @@ public class PollServiceImpl implements PollService
                         .map( pollMapper::pollToDTO );
         }
 
+        @Override
+        public List<PollDTO> updateMany ( @NotNull List<PollDTO> pollList )
+        {
+                User currentUser = ( User ) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+                List<Poll> polls = pollList.stream()
+                        .map( e -> pollRepository.findByCode( e.getCode() ) )
+                        .filter( e -> !Objects.equals(e.getCreator().getUsername(), currentUser.getUsername() ) )
+                        .collect( Collectors.toList() );
+
+                if ( !polls.isEmpty() )
+                        throw new RuntimeException( "Permission denied" );
+
+                return pollList.stream()
+                        .map( this::update )
+                        .collect( Collectors.toList() );
+        }
+
+        @Override
+        public PollDTO update ( @NotNull PollDTO pollDTO )
+        {
+                if ( pollRepository.existsByCode( pollDTO.getCode() ) )
+                {
+                        Poll pollFromDB = pollRepository.findByCode( pollDTO.getCode() );
+                        pollFromDB.setNonPublic( pollDTO.isNonPublic() );
+                        pollFromDB.setAllowSameIp( pollDTO.isAllowSameIp() );
+                        pollFromDB.setMultipleAnswer( pollDTO.isMultipleAnswer() );
+                        return pollMapper.pollToDTO( pollRepository.save( pollFromDB ) );
+                }
+                return null;
+        }
+
         private String generateRandomString ( int length )
         {
+                String str;
+                do
+                {
+                        str = RandomStringUtils.randomAlphanumeric( length );
+                } while ( pollRepository.existsByCode( str ) && voteRepository.existsByCode( str ) );
                 return RandomStringUtils.randomAlphanumeric( length );
         }
 

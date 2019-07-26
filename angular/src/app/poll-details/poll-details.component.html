@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <h4 class="title">{{ poll.name }}</h4>
+    <h4 class="title">{{ poll?.name }}</h4>
     <div class="row">
       <div *ngFor="let vote of poll?.votes; let i=index" class="form-check form-check-radio">
         <!-- <label class="form-check-label">

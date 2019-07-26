@@ -30,19 +30,19 @@
                                     <td>
                                         <div class="checkbox">
                                             <input [attr.id]="'multipleAnswer' +i" type="checkbox"
-                                                [ngModel]="poll.multipleAnswer"> <label [attr.for]="'multipleAnswer' +i"></label>
+                                                [(ngModel)]="poll.multipleAnswer"> <label [attr.for]="'multipleAnswer' +i"></label>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="checkbox">
-                                            <input [attr.id]="'sameIp'+i" type="checkbox" [ngModel]="poll.allowSameIp"><label
+                                            <input [attr.id]="'sameIp'+i" type="checkbox" [(ngModel)]="poll.allowSameIp"><label
                                                 [attr.for]="'sameIp'+i"></label>
                                         </div>
 
                                     </td>
                                     <td>
                                         <div class="checkbox">
-                                            <input [attr.id]="'nonPublic'+i" type="checkbox" [ngModel]="poll.nonPublic"><label
+                                            <input [attr.id]="'nonPublic'+i" type="checkbox" [(ngModel)]="poll.nonPublic"><label
                                                 [attr.for]="'nonPublic'+i"></label>
                                         </div>
                                     </td>
@@ -50,8 +50,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <button (click)="updatePolls()" class="btn btn-primary center-block">Save changes</button>
                         <nav aria-label="...">
-                            <ul style="margin-left: 180px; margin-top:-10px;" class="pagination"
+                            <ul style="margin-left: 180px; margin-top: 10px;" class="pagination"
                                 *ngIf="pagePoll?.content">
                                 <li *ngFor="let page of ' '.repeat(pagePoll.totalPages).split(''), let i = index "
                                     (click)="onSelect(i)" [class.active]="i === selectedPage" class="page-item"><a

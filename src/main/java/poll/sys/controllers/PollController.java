@@ -51,4 +51,10 @@ public class PollController
         {
                 return pollService.create( poll );
         }
+
+        @PutMapping ("/all")
+        public List<PollDTO> updateMany ( @RequestBody List<PollDTO> pollList )
+        {
+                return pollService.updateMany( pollList );
+        }
 }

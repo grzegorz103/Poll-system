@@ -44,13 +44,14 @@ export class PollDetailsComponent implements OnInit {
   ngOnInit() {
     this.rt.params.subscribe(params => {
       this.urlId = params['id'];
-      this.fetchData();
+      this.fetchData(false);
     });
   }
 
-  fetchData() {
+  fetchData(forceDisplay: boolean) {
     this.pollService.findById(this.urlId).subscribe(res => {
       this.poll = res;
+      this.poll.votes.sort((o1, o2) => o1.name.localeCompare(o2.name));
       let voteCount = 0;
       if (this.poll !== null) {
         this.selectedItems = [];
@@ -105,6 +106,9 @@ export class PollDetailsComponent implements OnInit {
           };
         }
       }
+      if(forceDisplay){
+        this.display = true;
+      }
     });
   }
 
@@ -128,8 +132,12 @@ export class PollDetailsComponent implements OnInit {
         }*/
       }
     }
-    this.pollService.vote(selectedVotes).subscribe(res =>
-      this.showNotification('success', 'Thank you for voting', 'pe-7s-smile'),
+    this.pollService.vote(selectedVotes).subscribe(res => {
+      this.showNotification('success', 'Thank you for voting', 'pe-7s-smile');
+      this.display = false;
+      this.fetchData(true);
+    }
+      ,
       err => this.showNotification('danger', 'You have alredy voted in this poll!', 'pe-7s-info'));
     //  this.showNotification('success', 'Thank you for voting', 'pe-7s-smile');
   }

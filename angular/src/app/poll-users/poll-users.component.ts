@@ -3,6 +3,7 @@ import { Poll, PagePoll } from 'app/poll-list/poll-list.component';
 import { PollService } from 'app/poll-list/poll.service';
 import moment = require('moment');
 
+declare var $: any;
 @Component({
   selector: 'app-poll-users',
   templateUrl: './poll-users.component.html',
@@ -32,7 +33,7 @@ export class PollUsersComponent implements OnInit {
       for (let i = 0; i < this.pagePoll.content.length; ++i) {
         let currentPoll = this.pagePoll.content[i];
         currentPoll.postDate = new Date(currentPoll.postDate.toString());
-       currentPoll.postDate.setMinutes(currentPoll.postDate.getMinutes() + minutesServerLocalDiff);
+        currentPoll.postDate.setMinutes(currentPoll.postDate.getMinutes() + minutesServerLocalDiff);
       }
       //  this.polls.sort((o1, o2) => o2.postDate.toString().localeCompare(o1.postDate.toString()));
     });
@@ -55,5 +56,27 @@ export class PollUsersComponent implements OnInit {
   onSelect(page: number) {
     this.selectedPage = page;
     this.fetchData(page);
+  }
+
+  updatePolls() {
+    this.pollService.updateMany(this.pagePoll.content)
+      .subscribe(res => {
+        this.fetchData(this.selectedPage);
+        this.showNotification('success', 'Changes saved', 'pe-7s-smile');
+      });
+  }
+
+  showNotification(type: string, text: string, icon: string) {
+    $.notify({
+      icon: icon,
+      message: text
+    }, {
+        type: type,
+        timer: 1000,
+        placement: {
+          from: 'top',
+          align: 'right'
+        }
+      });
   }
 }

@@ -65,6 +65,7 @@ public class VoteServiceImpl implements VoteService
                                 poll.getUsersIps().add( encoder.encode( ip ) );
                                 notificationService.create( poll );
                         }
+
                         voteCodes.stream()
                                 .map( voteRepository::findByCode )
                                 .map( Optional::get )

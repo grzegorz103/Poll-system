@@ -17,4 +17,8 @@ public interface PollService
         PollDTO create ( PollDTO poll );
 
         Page<PollDTO> findByUser ( Pageable pageable );
+
+        List<PollDTO> updateMany ( List<PollDTO> pollList );
+
+        PollDTO update ( PollDTO pollDTO );
 }

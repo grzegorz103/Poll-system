@@ -40,6 +40,10 @@ export class PollService {
   save(poll: Poll) {
     return this.http.post(this.url, poll);
   }
+  
+  updateMany(polls: Poll[]) {
+    return this.http.put(this.url + 'all', polls);
+  }
 
   getTime(){
     return this.http.get('/api/time');
