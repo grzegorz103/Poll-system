@@ -1,3 +1,3 @@
 # Poll-system
-Try live [demo](https://https://hot-poll.herokuapp.com/dashboard)
+Try live [demo](https://hot-poll.herokuapp.com/dashboard)
 
