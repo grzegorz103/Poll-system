@@ -8,12 +8,12 @@ import { Notification } from './shared/navbar/navbar.component';
 export class NotificationService {
 
     setNotificationsRead() {
-      return this.http.patch<Notification[]>('http://localhost:8080/api/notification/', null);
+      return this.http.patch<Notification[]>('https://hot-poll.herokuapp.com/api/notification/', null);
     }
 
   constructor(private http: HttpClient) { }
 
   public findByUser() {
-    return this.http.get<Notification[]>('http://localhost:8080/api/notification')
+    return this.http.get<Notification[]>('https://hot-poll.herokuapp.com/api/notification')
   }
 }

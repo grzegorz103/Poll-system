@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private http: HttpClient
   ) {
-    this.url = 'http://localhost:8080/api/user/admin';
+    this.url = 'https://hot-poll.herokuapp.com/api/user/admin';
   }
 
   public getToken(): string {

@@ -86,7 +86,7 @@ export class PollUsersComponent implements OnInit {
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = 'http://localhost:4200/poll/' + val;
+    selBox.value = 'http://hot-poll.herokuapp.com/api/poll/' + val;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();

@@ -12,7 +12,7 @@ export class PollService {
   constructor(
     private http: HttpClient
   ) {
-    this.url = 'http://localhost:8080/api/poll/';
+    this.url = 'https://hot-poll.herokuapp.com/api/poll/';
   }
 
   findAll() {
@@ -20,12 +20,12 @@ export class PollService {
   }
 
   findAllPaged(page: number) {
-    let urlWithParam = 'http://localhost:8080/api/poll?page=' + page + '&size=4';
+    let urlWithParam = 'https://hot-poll.herokuapp.com/api/poll?page=' + page + '&size=4';
     return this.http.get<PagePoll>(urlWithParam);
   }
 
   findByUser(page: number){
-    let urlWithParam= 'http://localhost:8080/api/poll/my/all?page=' + page + '&size=4';
+    let urlWithParam= 'https://hot-poll.herokuapp.com/api/poll/my/all?page=' + page + '&size=4';
     return this.http.get<PagePoll>(urlWithParam);
   }
 
@@ -46,6 +46,6 @@ export class PollService {
   }
 
   getTime(){
-    return this.http.get('http://localhost:8080/api/time');
+    return this.http.get('https://hot-poll.herokuapp.com/api/time');
   }
 }

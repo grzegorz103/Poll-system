@@ -9,7 +9,7 @@ export class UserService {
   private usersUrl: string;
 
   constructor(private http: HttpClient) {
-    this.usersUrl = '/api/users/';
+    this.usersUrl = 'https://hot-poll.herokuapp.com/api/users/';
   }
 
   public save(user: User) {
@@ -34,7 +34,7 @@ export class UserService {
   }
 
   public isLoginCorrect(username: string, password: string) {
-    return this.http.post<Observable<boolean>>('http://localhost:8080/api/users/login', {
+    return this.http.post<Observable<boolean>>('https://hot-poll.herokuapp.com/api/users/login', {
       username: username,
       password: password,
       passwordConfirm: password
