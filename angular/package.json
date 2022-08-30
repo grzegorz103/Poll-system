@@ -36,7 +36,7 @@
         "googleapis": "33.0.0",
         "hashmap": "^2.3.0",
         "jquery": "3.4.0",
-        "moment-timezone": "^0.5.26",
+        "moment-timezone": "^0.5.35",
         "perfect-scrollbar": "^1.4.0",
         "rxjs": "6.3.2",
         "rxjs-compat": "6.3.2",
