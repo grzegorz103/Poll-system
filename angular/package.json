@@ -40,11 +40,11 @@
         "perfect-scrollbar": "^1.4.0",
         "rxjs": "6.3.2",
         "rxjs-compat": "6.3.2",
-        "webpack": "^4.35.2",
+        "webpack": "^5.75.0",
         "zone.js": "0.8.26"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "0.8.1",
+        "@angular-devkit/build-angular": "15.0.4",
         "@angular/cli": "6.2.1",
         "@angular/compiler-cli": "6.1.7",
         "@types/jasmine": "2.8.8",
